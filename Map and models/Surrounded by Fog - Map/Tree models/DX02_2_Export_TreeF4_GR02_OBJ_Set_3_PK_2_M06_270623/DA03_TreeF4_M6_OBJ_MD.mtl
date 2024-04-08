@@ -1,0 +1,24 @@
+# Blender 3.5.0 MTL File: 'Dx01_TreeF04_RenderView_Flag_SingleSet_3_GR01_v1.0.3.blend'
+# www.blender.org
+
+newmtl MT01_MatTreeF4_M6_P1
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd E:/BU02_ScriptsProjects_Support/PR12_Blender_Sup/B02_Models_3D_SELL/BD01_MOD_SEL_DEVELOP/MD07_Trees_Pack_F4_DEV_M05_240523/status/S05_Texture/AT02_TreeF4_SET3_GR02/TreeF4_M6/DA02_TreeF4_M6_FBX_MD_MT01_MatTreeF4_M6_P1_BaseColor.png
+map_Ns E:/BU02_ScriptsProjects_Support/PR12_Blender_Sup/B02_Models_3D_SELL/BD01_MOD_SEL_DEVELOP/MD07_Trees_Pack_F4_DEV_M05_240523/status/S05_Texture/AT02_TreeF4_SET3_GR02/TreeF4_M6/DA02_TreeF4_M6_FBX_MD_MT01_MatTreeF4_M6_P1_Roughness.png
+map_Bump -bm 1.000000 E:/BU02_ScriptsProjects_Support/PR12_Blender_Sup/B02_Models_3D_SELL/BD01_MOD_SEL_DEVELOP/MD07_Trees_Pack_F4_DEV_M05_240523/status/S05_Texture/AT02_TreeF4_SET3_GR02/TreeF4_M6/DA02_TreeF4_M6_FBX_MD_MT01_MatTreeF4_M6_P1_Normal.png
+
+newmtl MT01_MatTreeF4_M6_P2
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd E:/BU02_ScriptsProjects_Support/PR12_Blender_Sup/B02_Models_3D_SELL/BD01_MOD_SEL_DEVELOP/MD07_Trees_Pack_F4_DEV_M05_240523/status/S05_Texture/AT02_TreeF4_SET3_GR02/TreeF4_M6/DA02_TreeF4_M6_FBX_MD_MT01_MatTreeF4_M6_P2_Branch_BaseColor.png
+map_Ns E:/BU02_ScriptsProjects_Support/PR12_Blender_Sup/B02_Models_3D_SELL/BD01_MOD_SEL_DEVELOP/MD07_Trees_Pack_F4_DEV_M05_240523/status/S05_Texture/AT02_TreeF4_SET3_GR02/TreeF4_M6/DA02_TreeF4_M6_FBX_MD_MT01_MatTreeF4_M6_P2_Branch_Roughness.png
+map_Bump -bm 1.000000 E:/BU02_ScriptsProjects_Support/PR12_Blender_Sup/B02_Models_3D_SELL/BD01_MOD_SEL_DEVELOP/MD07_Trees_Pack_F4_DEV_M05_240523/status/S05_Texture/AT02_TreeF4_SET3_GR02/TreeF4_M6/DA02_TreeF4_M6_FBX_MD_MT01_MatTreeF4_M6_P2_Branch_Normal.png
