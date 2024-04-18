@@ -5,19 +5,18 @@ using UnityEngine.AI;
 
 public class WoodWalkerBehaviour : MonoBehaviour
 {
-    public float detectionRadius = 10f; // Radius within which the player can trigger the NPC
-    public float chaseSpeed = 5f; // Speed at which the NPC chases the player
+    public int detectionRadius = 50; // Radius within which the player can trigger the NPC
+    public int chaseSpeed = 5; // Speed at which the NPC chases the player
     public GameObject awakeModel; // Reference to the awake model GameObject
     public GameObject asleepModel; // Reference to the asleep model GameObject
 
-    private Transform player; // Reference to the player's transform
+    private Transform player = GameObject.FindGameObjectWithTag("Player").transform;
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
     private Animator animator; // Reference to the Animator component
     private bool isPlayerNearby = false; // Flag to track if player is nearby
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform; // Find the player GameObject
         agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component
         animator = GetComponent<Animator>(); // Get the Animator component
         SetNPCModel(asleepModel); // Set initial model to asleep model
@@ -26,7 +25,7 @@ public class WoodWalkerBehaviour : MonoBehaviour
     private void Update()
     {
         // Check if player is within detection radius and not crouching
-        if (isPlayerNearby && !Input.GetKey(KeyCode.LeftControl))
+        if (isPlayerNearby == true && !Input.GetKey(KeyCode.LeftControl))
         {
             // Trigger jump scare animation
             animator.SetTrigger("JumpScare");
