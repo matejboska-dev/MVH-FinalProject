@@ -1,74 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class WoodWalkerBehaviour : MonoBehaviour
 {
-    public int detectionRadius = 50; // Radius within which the player can trigger the NPC
-    public int chaseSpeed = 5; // Speed at which the NPC chases the player
-    public GameObject awakeModel; // Reference to the awake model GameObject
-    public GameObject asleepModel; // Reference to the asleep model GameObject
-
-    private Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+    public Transform player; // Reference to the player's transform
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
-    private Animator animator; // Reference to the Animator component
-    private bool isPlayerNearby = false; // Flag to track if player is nearby
+    private bool isChasing = false; // Flag to track whether NPC is chasing or not
 
-    private void Start()
+    void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); // Get the NavMeshAgent component
-        animator = GetComponent<Animator>(); // Get the Animator component
-        SetNPCModel(asleepModel); // Set initial model to asleep model
+        agent = GetComponent<NavMeshAgent>(); // Get reference to NavMeshAgent component
     }
 
-    private void Update()
+    void Update()
     {
-        // Check if player is within detection radius and not crouching
-        if (isPlayerNearby == true && !Input.GetKey(KeyCode.LeftControl))
+        if (!isChasing)
         {
-            // Trigger jump scare animation
-            animator.SetTrigger("JumpScare");
+            // If not already chasing, check if the player is within range
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            if (distanceToPlayer <= agent.stoppingDistance)
+            {
+                StartChasing();
+            }
+        }
+        else
+        {
+            // If already chasing, set the destination to the player's position
+            agent.SetDestination(player.position);
 
-            // Start chasing the player
-            ChasePlayer();
+            // Check if the player is within stopping distance
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            if (distanceToPlayer > agent.stoppingDistance)
+            {
+                StopChasing();
+            }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void StartChasing()
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerNearby = true;
-            SetNPCModel(awakeModel); // Change model to awake when player is nearby
-        }
+        isChasing = true;
+        // You might want to add additional behavior here when NPC starts chasing
+        Debug.Log("NPC is now chasing the player!");
     }
 
-    private void OnTriggerExit(Collider other)
+    public void StopChasing()
     {
-        if (other.CompareTag("Player"))
-        {
-            // If player exits NPC's trigger radius, stop chasing
-            isPlayerNearby = false;
-            agent.ResetPath();
-            SetNPCModel(asleepModel); // Change model back to asleep
-        }
-    }
-
-    private void ChasePlayer()
-    {
-        // Set destination to player's position
-        agent.SetDestination(player.position);
-        agent.speed = chaseSpeed; // Set chase speed
-    }
-
-    private void SetNPCModel(GameObject model)
-    {
-        // Disable all models
-        awakeModel.SetActive(false);
-        asleepModel.SetActive(false);
-
-        // Enable the specified model
-        model.SetActive(true);
+        isChasing = false;
+        // You might want to add additional behavior here when NPC stops chasing
+        Debug.Log("NPC has stopped chasing the player!");
     }
 }
