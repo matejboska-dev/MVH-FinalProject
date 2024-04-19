@@ -4,50 +4,78 @@ using UnityEngine.AI;
 public class WoodWalkerBehaviour : MonoBehaviour
 {
     public Transform player; // Reference to the player's transform
+    public GameObject normalModel; // Reference to the normal model GameObject
+    public GameObject chasingModel; // Reference to the chasing model GameObject
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
     private bool isChasing = false; // Flag to track whether NPC is chasing or not
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); // Get reference to NavMeshAgent component
+        agent = GetComponent<NavMeshAgent>(); 
+       
+        SetNormalModelActive(true);
+        SetChasingModelActive(false);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && !Input.GetKey(KeyCode.LeftControl))
+        {
+            StartChasing();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") )
+        {
+            StopChasing();
+        }
     }
 
     void Update()
     {
-        if (!isChasing)
+        if (isChasing)
         {
-            // If not already chasing, check if the player is within range
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distanceToPlayer <= agent.stoppingDistance)
-            {
-                StartChasing();
-            }
-        }
-        else
-        {
-            // If already chasing, set the destination to the player's position
             agent.SetDestination(player.position);
-
-            // Check if the player is within stopping distance
-            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-            if (distanceToPlayer > agent.stoppingDistance)
-            {
-                StopChasing();
-            }
+        }
+        else if (!Input.GetKey(KeyCode.LeftControl)) {
+            // If not already chasing, check if the player is within range and not holding down left control
+             
+                float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+                if (distanceToPlayer <= agent.stoppingDistance)
+                {
+                    StartChasing();
+                }
+            
         }
     }
 
-    public void StartChasing()
+    void StartChasing()
     {
         isChasing = true;
-        // You might want to add additional behavior here when NPC starts chasing
+        SetNormalModelActive(false);
+        SetChasingModelActive(true);
+
         Debug.Log("NPC is now chasing the player!");
     }
 
-    public void StopChasing()
+    void StopChasing()
     {
         isChasing = false;
-        // You might want to add additional behavior here when NPC stops chasing
+        SetChasingModelActive(false);
+        SetNormalModelActive(true);
+
         Debug.Log("NPC has stopped chasing the player!");
+    }
+
+    void SetNormalModelActive(bool active)
+    {
+        normalModel.SetActive(active);
+    }
+
+    void SetChasingModelActive(bool active)
+    {
+        chasingModel.SetActive(active);
     }
 }
