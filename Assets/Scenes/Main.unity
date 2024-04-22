@@ -434,8 +434,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 17.04534, y: 1.6182212, z: 19.172264}
-  m_Center: {x: -0.18233967, y: 0.30911058, z: 0.14097357}
+  m_Size: {x: 27.291718, y: 1.6182212, z: 30.366585}
+  m_Center: {x: 0.36149645, y: 0.30911058, z: -0.03723526}
 --- !u!23 &309141827
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1110,17 +1110,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9556b91298e0f8e4ab2b66f2f7d21851,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.2511
+      value: -6.252
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9556b91298e0f8e4ab2b66f2f7d21851,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.556
+      value: 1.554
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9556b91298e0f8e4ab2b66f2f7d21851,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.3293
+      value: 4.476
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9556b91298e0f8e4ab2b66f2f7d21851,
         type: 3}
@@ -1851,8 +1851,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 17.04534, y: 1.6182212, z: 19.172264}
-  m_Center: {x: -0.18233967, y: 0.30911058, z: 0.14097357}
+  m_Size: {x: 21.877296, y: 1.6182212, z: 25.283295}
+  m_Center: {x: 0.9980664, y: 0.30911058, z: 0.07487106}
 --- !u!1 &1287884559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,8 +1971,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 2, z: 3}
-  m_Center: {x: 0.029999793, y: -0.0052143484, z: -0.020127371}
+  m_Size: {x: 4.160419, y: 2.17644, z: 4.561882}
+  m_Center: {x: 0.054050818, y: 0.08300567, z: -0.20943376}
 --- !u!850595691 &1461893512
 LightingSettings:
   m_ObjectHideFlags: 0

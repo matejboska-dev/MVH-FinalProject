@@ -8,11 +8,13 @@ public class WoodWalkerBehaviour : MonoBehaviour
     public GameObject chasingModel; // Reference to the chasing model GameObject
     private NavMeshAgent agent; // Reference to the NavMeshAgent component
     private bool isChasing = false; // Flag to track whether NPC is chasing or not
+    private Vector3 startingPosition; // Store the NPC's starting position
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>(); 
-       
+        agent = GetComponent<NavMeshAgent>();
+        startingPosition = transform.position; // Save the starting position
+
         SetNormalModelActive(true);
         SetChasingModelActive(false);
     }
@@ -27,7 +29,7 @@ public class WoodWalkerBehaviour : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player") )
+        if (other.CompareTag("Player"))
         {
             StopChasing();
         }
@@ -38,16 +40,41 @@ public class WoodWalkerBehaviour : MonoBehaviour
         if (isChasing)
         {
             agent.SetDestination(player.position);
+            SetChasingModelActive(true); // Keep chasing model active while chasing
         }
-        else if (!Input.GetKey(KeyCode.LeftControl)) {
-            // If not already chasing, check if the player is within range and not holding down left control
-             
-                float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-                if (distanceToPlayer <= agent.stoppingDistance)
+        else if (!Input.GetKey(KeyCode.LeftControl))
+        {
+            // Check if the player is within range
+            float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+            if (distanceToPlayer <= agent.stoppingDistance)
+            {
+                StartChasing();
+            }
+            else
+            {
+                // Check distance to starting position
+                float distanceToStart = Vector3.Distance(transform.position, startingPosition);
+
+                if (distanceToStart > agent.stoppingDistance)
                 {
-                    StartChasing();
+                    // Set destination to starting position
+                    agent.SetDestination(startingPosition);
+                    SetChasingModelActive(true);  // Keep chasing model active while returning
                 }
-            
+                else
+                {
+                    // Reached starting position, switch to normal model
+                    SetChasingModelActive(false);
+                    SetNormalModelActive(true);
+                }
+
+                // Check if agent is not moving and switch to normal model
+                if (agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
+                {
+                    SetChasingModelActive(false);
+                    SetNormalModelActive(true);
+                }
+            }
         }
     }
 
@@ -63,8 +90,6 @@ public class WoodWalkerBehaviour : MonoBehaviour
     void StopChasing()
     {
         isChasing = false;
-        SetChasingModelActive(false);
-        SetNormalModelActive(true);
 
         Debug.Log("NPC has stopped chasing the player!");
     }
