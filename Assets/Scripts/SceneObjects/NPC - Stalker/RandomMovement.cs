@@ -9,9 +9,11 @@ public class RandomMovement : MonoBehaviour
     public float range; // Radius of sphere
     public float chaseRadius; // Radius within which Stalker will chase the player
     public Transform player; // Reference to the player's transform
+    public Light flashlight; // Reference to the light GameObject
 
     public Transform centrePoint; // Centre of the area the agent wants to move around in
-    // Instead of centrePoint, you can set it as the transform of the agent if you don't care about a specific area
+
+    private bool isChasing = false;
 
     void Start()
     {
@@ -25,9 +27,11 @@ public class RandomMovement : MonoBehaviour
         {
             // Chase the player
             agent.SetDestination(player.position);
+            isChasing = true;
         }
         else
         {
+            isChasing = false;
             // Random movement within the defined area
             if (agent.remainingDistance <= agent.stoppingDistance) // Done with path
             {
@@ -36,6 +40,26 @@ public class RandomMovement : MonoBehaviour
                 {
                     Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); // So you can see with gizmos
                     agent.SetDestination(point);
+                }
+            }
+        }
+
+        // Check if the NPC is chasing the player
+        if (isChasing)
+        {
+            // Check if the flashlight is on and pointing at the NPC
+            if (flashlight.enabled)
+            {
+                Vector3 directionToNPC = transform.position - flashlight.transform.position;
+                float angle = Vector3.Angle(flashlight.transform.forward, directionToNPC);
+
+                if (angle < flashlight.spotAngle / 2)
+                {
+                    // Make the NPC move away from the player
+                    Vector3 awayFromPlayerDirection = transform.position - player.position;
+                    Vector3 destination = transform.position + awayFromPlayerDirection.normalized * range;
+                    agent.SetDestination(destination);
+                    return; // Stop NPC behavior if it's moving away
                 }
             }
         }

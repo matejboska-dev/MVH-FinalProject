@@ -2876,7 +2876,6 @@ GameObject:
   - component: {fileID: 1756444708}
   - component: {fileID: 1756444707}
   - component: {fileID: 1756444706}
-  - component: {fileID: 1756444711}
   - component: {fileID: 1756444705}
   m_Layer: 0
   m_Name: Stalker
@@ -2923,6 +2922,7 @@ MonoBehaviour:
   range: 50
   chaseRadius: 15
   player: {fileID: 629188168}
+  flashlight: {fileID: 817530844}
   centrePoint: {fileID: 1756444710}
 --- !u!65 &1756444707
 BoxCollider:
@@ -3010,20 +3010,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1756444711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756444704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 430722021fd1ae34798d18901a7196c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fearRadius: 10
-  flashlight: {fileID: 817530843}
 --- !u!1 &1871002773
 GameObject:
   m_ObjectHideFlags: 0
@@ -4191,6 +4177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2177553916953090586, guid: 096a7a943ee964775ad1c68d607d5c32,
+        type: 3}
+      propertyPath: near clip plane
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 2177553917426881074, guid: 096a7a943ee964775ad1c68d607d5c32,
         type: 3}
