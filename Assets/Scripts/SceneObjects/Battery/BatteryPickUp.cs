@@ -38,7 +38,7 @@ public class BatteryPickUp : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Niggers");
+      
         if (inReach && Input.GetKeyDown(KeyCode.E))
         {
             if (flashlight != null)
