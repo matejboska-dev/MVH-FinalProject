@@ -38,6 +38,7 @@ public class BatteryPickUp : MonoBehaviour
 
     void Update()
     {
+      
         if (inReach && Input.GetKeyDown(KeyCode.E))
         {
             if (flashlight != null)
